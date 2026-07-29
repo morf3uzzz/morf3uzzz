@@ -36,7 +36,13 @@ query($login: String!) {
       orderBy: {field: STARGAZERS, direction: DESC}
     ) {
       totalCount
-      nodes { name stargazerCount forkCount primaryLanguage { name } }
+      nodes {
+        name
+        stargazerCount
+        forkCount
+        primaryLanguage { name }
+        repositoryTopics(first: 20) { nodes { topic { name } } }
+      }
     }
   }
 }
@@ -73,7 +79,21 @@ def collect(user):
         if lang:
             langs[lang["name"]] = langs.get(lang["name"], 0) + 1
 
+    # Скилл — публичный репозиторий с топиком `skill`. Повесил топик — цифра
+    # выросла сама, без правки кода.
+    skills = sum(
+        1
+        for r in repos
+        if any(
+            t["topic"]["name"] == "skill" for t in r["repositoryTopics"]["nodes"]
+        )
+    )
+
+    top = [r for r in repos if r["stargazerCount"] > 0][:5]
+
     return {
+        "skills": skills,
+        "agents_word": plural_projects(len(top)),
         "repos": user["repositories"]["totalCount"],
         "stars": sum(r["stargazerCount"] for r in repos),
         "forks": sum(r["forkCount"] for r in repos),
@@ -113,6 +133,32 @@ CX, CY = 240, (H - FOOTER) // 2
 MARGIN = 22
 R_MAX = min(CY, (H - FOOTER) - CY) - MARGIN
 R_MIN = 74
+
+
+def plural_projects(n):
+    """Русское склонение: 1 проект, 2 проекта, 5 проектов."""
+    if 11 <= n % 100 <= 14:
+        word = "проектов"
+    elif n % 10 == 1:
+        word = "проект"
+    elif n % 10 in (2, 3, 4):
+        word = "проекта"
+    else:
+        word = "проектов"
+    return f"{n} живых {word}" if word != "проект" else f"{n} живой {word}"
+
+
+def plural_skills(n):
+    """Русское склонение с согласованным сказуемым:
+    1 скилл создан · 2 скилла создано · 5 скиллов создано.
+    """
+    if 11 <= n % 100 <= 14:
+        return "скиллов создано"
+    if n % 10 == 1:
+        return "скилл создан"
+    if n % 10 in (2, 3, 4):
+        return "скилла создано"
+    return "скиллов создано"
 
 
 def orbits(d, c):
@@ -168,25 +214,18 @@ def render(d, theme):
     rings, agents = orbits(d, c)
     stack = " · ".join(n for n, _ in d["langs"]) or "Python · JavaScript"
 
-    facts = [
-        (f"{d['repos']}", "открытых проекта"),
-        (f"{d['stars']}", "звезды собрано"),
-        (f"{d['forks']}", "форка сделано"),
-    ]
     # Подпись отбита от цифры на 24px по базовой линии: при кегле 27 это даёт
     # ~14px чистого просвета, иначе подпись читается как прилепленная.
-    fact_svg = "".join(
-        f'<g transform="translate({i * 104},0)">'
-        f'<text x="0" y="0" font-family="{serif}" font-size="27" font-weight="700" '
-        f'fill="{c["text"]}">{v}</text>'
-        f'<text x="0" y="24" font-family="{mono}" font-size="9.5" fill="{c["dim"]}" '
-        f'letter-spacing="0.3">{label}</text></g>'
-        for i, (v, label) in enumerate(facts)
+    fact_svg = (
+        f'<text x="0" y="0" font-family="{serif}" font-size="34" font-weight="700" '
+        f'fill="{c["text"]}">{d["skills"]}</text>'
+        f'<text x="0" y="24" font-family="{mono}" font-size="10" fill="{c["dim"]}" '
+        f'letter-spacing="0.4">{plural_skills(d["skills"])}</text>'
     )
 
     return f"""<svg xmlns="http://www.w3.org/2000/svg" width="{W}" height="{H}"
      viewBox="0 0 {W} {H}" role="img"
-     aria-label="RixAI — {d['repos']} открытых проектов, {d['stars']} звёзд, {d['days']} дней работы">
+     aria-label="RixAI — {d['skills']} {plural_skills(d['skills'])}, на орбите {d['agents_word']}">
   <defs>
     <radialGradient id="core-{theme}" cx="50%" cy="50%">
       <stop offset="0%"   stop-color="{c['core_in']}"/>
@@ -230,11 +269,11 @@ def render(d, theme):
       <circle cx="3" cy="130" r="2.5"/>
     </g>
 
-    <g transform="translate(0,180)">{fact_svg}</g>
+    <g transform="translate(0,186)">{fact_svg}</g>
   </g>
 
   <text x="28" y="{FOOTER_Y}" font-family="{mono}" font-size="10.5" fill="{c['dim']}">
-    каждая точка на орбите — живой проект · обновлено {d['updated']}
+    на орбите — {d['agents_word']} · обновлено {d['updated']}
   </text>
   <text x="{W - 28}" y="{FOOTER_Y}" text-anchor="end" font-family="{mono}"
         font-size="10.5" fill="{c['dim']}">{d['days']} дней в работе</text>
@@ -245,7 +284,10 @@ def render(d, theme):
 def verify(data):
     """Сверяет собранные цифры с тем, что отдаёт публичный REST API.
 
-    Если панель разойдётся с реальностью — падаем, а не публикуем враньё.
+    Панель показывает только счётчик скиллов, но сверка идёт по репозиториям:
+    если срез данных снова уедет на чужой аккаунт (так уже было из-за
+    конфликта переменной USERNAME), расхождение вскроется здесь и сборка
+    упадёт, а не опубликует враньё.
     """
     req = urllib.request.Request(
         f"https://api.github.com/users/{LOGIN}",

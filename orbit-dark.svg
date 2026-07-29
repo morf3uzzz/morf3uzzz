@@ -1,6 +1,6 @@
 <svg xmlns="http://www.w3.org/2000/svg" width="860" height="400"
      viewBox="0 0 860 400" role="img"
-     aria-label="RixAI — 9 открытых проектов, 93 звёзд, 186 дней работы">
+     aria-label="RixAI — 0 скиллов создано, на орбите 5 живых проектов">
   <defs>
     <radialGradient id="core-dark" cx="50%" cy="50%">
       <stop offset="0%"   stop-color="#fff5ec"/>
@@ -44,11 +44,11 @@
       <circle cx="3" cy="130" r="2.5"/>
     </g>
 
-    <g transform="translate(0,180)"><g transform="translate(0,0)"><text x="0" y="0" font-family="Georgia,'Times New Roman',serif" font-size="27" font-weight="700" fill="#f8fafc">9</text><text x="0" y="24" font-family="ui-monospace,SFMono-Regular,Menlo,Consolas,monospace" font-size="9.5" fill="#94a3b8" letter-spacing="0.3">открытых проекта</text></g><g transform="translate(104,0)"><text x="0" y="0" font-family="Georgia,'Times New Roman',serif" font-size="27" font-weight="700" fill="#f8fafc">93</text><text x="0" y="24" font-family="ui-monospace,SFMono-Regular,Menlo,Consolas,monospace" font-size="9.5" fill="#94a3b8" letter-spacing="0.3">звезды собрано</text></g><g transform="translate(208,0)"><text x="0" y="0" font-family="Georgia,'Times New Roman',serif" font-size="27" font-weight="700" fill="#f8fafc">26</text><text x="0" y="24" font-family="ui-monospace,SFMono-Regular,Menlo,Consolas,monospace" font-size="9.5" fill="#94a3b8" letter-spacing="0.3">форка сделано</text></g></g>
+    <g transform="translate(0,186)"><text x="0" y="0" font-family="Georgia,'Times New Roman',serif" font-size="34" font-weight="700" fill="#f8fafc">0</text><text x="0" y="24" font-family="ui-monospace,SFMono-Regular,Menlo,Consolas,monospace" font-size="10" fill="#94a3b8" letter-spacing="0.4">скиллов создано</text></g>
   </g>
 
   <text x="28" y="382" font-family="ui-monospace,SFMono-Regular,Menlo,Consolas,monospace" font-size="10.5" fill="#94a3b8">
-    каждая точка на орбите — живой проект · обновлено 29.07.2026
+    на орбите — 5 живых проектов · обновлено 29.07.2026
   </text>
   <text x="832" y="382" text-anchor="end" font-family="ui-monospace,SFMono-Regular,Menlo,Consolas,monospace"
         font-size="10.5" fill="#94a3b8">186 дней в работе</text>
