@@ -103,6 +103,13 @@ THEMES = {
 W, H = 860, 380
 CX, CY = 240, 190
 
+# Внешняя орбита должна укладываться в холст с полем, иначе её срезает
+# верхней и нижней кромкой. Радиусы считаются от этого предела, а не задаются
+# жёстко: сколько бы агентов ни было, дальний пройдёт ровно по границе поля.
+MARGIN = 26
+R_MAX = min(CY, H - CY) - MARGIN   # 164
+R_MIN = 74
+
 
 def orbits(d, c):
     """Орбиты и агенты. Больше звёзд — ближе к ядру и крупнее точка."""
@@ -113,8 +120,10 @@ def orbits(d, c):
     rings, agents = [], []
     peak = max(r["stargazerCount"] for r in top) or 1
 
+    gap = (R_MAX - R_MIN) / max(len(top) - 1, 1)
+
     for i, repo in enumerate(top):
-        radius = 88 + i * 30
+        radius = R_MIN + i * gap
         speed = 13 + i * 6.5
         start = (i * 137) % 360
         size = 3.0 + 2.4 * (repo["stargazerCount"] / peak)
@@ -122,7 +131,7 @@ def orbits(d, c):
         direction = -1 if i % 2 else 1
 
         rings.append(
-            f'<circle cx="{CX}" cy="{CY}" r="{radius}" fill="none" '
+            f'<circle cx="{CX}" cy="{CY}" r="{radius:.1f}" fill="none" '
             f'stroke="{c["faint"]}" stroke-opacity="0.10"/>'
         )
         # дуга-трассировка
@@ -130,7 +139,7 @@ def orbits(d, c):
             f'<g><animateTransform attributeName="transform" type="rotate" '
             f'from="{start} {CX} {CY}" to="{start + 360 * direction} {CX} {CY}" '
             f'dur="{speed}s" repeatCount="indefinite"/>'
-            f'<path d="M{CX + radius},{CY} A{radius},{radius} 0 0 1 '
+            f'<path d="M{CX + radius:.1f},{CY} A{radius:.1f},{radius:.1f} 0 0 1 '
             f'{CX + radius * 0.71:.1f},{CY + radius * 0.71:.1f}" fill="none" '
             f'stroke="{colour}" stroke-opacity="0.34" stroke-width="1.4" '
             f'stroke-linecap="round"/></g>'
@@ -139,7 +148,7 @@ def orbits(d, c):
             f'<g><animateTransform attributeName="transform" type="rotate" '
             f'from="{start} {CX} {CY}" to="{start + 360 * direction} {CX} {CY}" '
             f'dur="{speed}s" repeatCount="indefinite"/>'
-            f'<circle cx="{CX + radius}" cy="{CY}" r="{size:.1f}" fill="{colour}">'
+            f'<circle cx="{CX + radius:.1f}" cy="{CY}" r="{size:.1f}" fill="{colour}">'
             f'<title>{escape(repo["name"])} — {repo["stargazerCount"]}★</title>'
             f'</circle></g>'
         )
@@ -160,12 +169,14 @@ def render(d, theme):
         (f"{d['stars']}", "звезды собрано"),
         (f"{d['forks']}", "форка сделано"),
     ]
+    # Подпись отбита от цифры на 24px по базовой линии: при кегле 27 это даёт
+    # ~14px чистого просвета, иначе подпись читается как прилепленная.
     fact_svg = "".join(
         f'<g transform="translate({i * 104},0)">'
         f'<text x="0" y="0" font-family="{serif}" font-size="27" font-weight="700" '
         f'fill="{c["text"]}">{v}</text>'
-        f'<text x="0" y="17" font-family="{mono}" font-size="9.5" fill="{c["dim"]}">'
-        f'{label}</text></g>'
+        f'<text x="0" y="24" font-family="{mono}" font-size="9.5" fill="{c["dim"]}" '
+        f'letter-spacing="0.3">{label}</text></g>'
         for i, (v, label) in enumerate(facts)
     )
 
@@ -186,7 +197,7 @@ def render(d, theme):
 
   <rect width="{W}" height="{H}" rx="14" fill="{c['bg']}"/>
 
-  <circle cx="{CX}" cy="{CY}" r="168" fill="url(#glow-{theme})"/>
+  <circle cx="{CX}" cy="{CY}" r="{R_MAX + 14}" fill="url(#glow-{theme})"/>
   {rings}
   {agents}
 
