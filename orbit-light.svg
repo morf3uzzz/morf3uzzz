@@ -1,5 +1,5 @@
-<svg xmlns="http://www.w3.org/2000/svg" width="860" height="380"
-     viewBox="0 0 860 380" role="img"
+<svg xmlns="http://www.w3.org/2000/svg" width="860" height="400"
+     viewBox="0 0 860 400" role="img"
      aria-label="RixAI — 9 открытых проектов, 93 звёзд, 186 дней работы">
   <defs>
     <radialGradient id="core-light" cx="50%" cy="50%">
@@ -13,16 +13,16 @@
     </radialGradient>
   </defs>
 
-  <rect width="860" height="380" rx="14" fill="#faf8f5"/>
+  <rect width="860" height="400" rx="14" fill="#faf8f5"/>
 
-  <circle cx="240" cy="190" r="178" fill="url(#glow-light)"/>
-  <circle cx="240" cy="190" r="74.0" fill="none" stroke="#141821" stroke-opacity="0.10"/><g><animateTransform attributeName="transform" type="rotate" from="0 240 190" to="360 240 190" dur="13.0s" repeatCount="indefinite"/><path d="M314.0,190 A74.0,74.0 0 0 1 292.5,242.5" fill="none" stroke="#ea580c" stroke-opacity="0.34" stroke-width="1.4" stroke-linecap="round"/></g><circle cx="240" cy="190" r="96.5" fill="none" stroke="#141821" stroke-opacity="0.10"/><g><animateTransform attributeName="transform" type="rotate" from="137 240 190" to="-223 240 190" dur="19.5s" repeatCount="indefinite"/><path d="M336.5,190 A96.5,96.5 0 0 1 308.5,258.5" fill="none" stroke="#0284c7" stroke-opacity="0.34" stroke-width="1.4" stroke-linecap="round"/></g><circle cx="240" cy="190" r="119.0" fill="none" stroke="#141821" stroke-opacity="0.10"/><g><animateTransform attributeName="transform" type="rotate" from="274 240 190" to="634 240 190" dur="26.0s" repeatCount="indefinite"/><path d="M359.0,190 A119.0,119.0 0 0 1 324.5,274.5" fill="none" stroke="#7c3aed" stroke-opacity="0.34" stroke-width="1.4" stroke-linecap="round"/></g><circle cx="240" cy="190" r="141.5" fill="none" stroke="#141821" stroke-opacity="0.10"/><g><animateTransform attributeName="transform" type="rotate" from="51 240 190" to="-309 240 190" dur="32.5s" repeatCount="indefinite"/><path d="M381.5,190 A141.5,141.5 0 0 1 340.5,290.5" fill="none" stroke="#16a34a" stroke-opacity="0.34" stroke-width="1.4" stroke-linecap="round"/></g><circle cx="240" cy="190" r="164.0" fill="none" stroke="#141821" stroke-opacity="0.10"/><g><animateTransform attributeName="transform" type="rotate" from="188 240 190" to="548 240 190" dur="39.0s" repeatCount="indefinite"/><path d="M404.0,190 A164.0,164.0 0 0 1 356.4,306.4" fill="none" stroke="#db2777" stroke-opacity="0.34" stroke-width="1.4" stroke-linecap="round"/></g>
-  <g><animateTransform attributeName="transform" type="rotate" from="0 240 190" to="360 240 190" dur="13.0s" repeatCount="indefinite"/><circle cx="314.0" cy="190" r="5.4" fill="#ea580c"><title>telegram-exporter — 62★</title></circle></g><g><animateTransform attributeName="transform" type="rotate" from="137 240 190" to="-223 240 190" dur="19.5s" repeatCount="indefinite"/><circle cx="336.5" cy="190" r="3.9" fill="#0284c7"><title>telegram-exporter-downloads — 22★</title></circle></g><g><animateTransform attributeName="transform" type="rotate" from="274 240 190" to="634 240 190" dur="26.0s" repeatCount="indefinite"/><circle cx="359.0" cy="190" r="3.1" fill="#7c3aed"><title>RixCopier-Extension — 3★</title></circle></g><g><animateTransform attributeName="transform" type="rotate" from="51 240 190" to="-309 240 190" dur="32.5s" repeatCount="indefinite"/><circle cx="381.5" cy="190" r="3.1" fill="#16a34a"><title>telegram-exporter-open — 3★</title></circle></g><g><animateTransform attributeName="transform" type="rotate" from="188 240 190" to="548 240 190" dur="39.0s" repeatCount="indefinite"/><circle cx="404.0" cy="190" r="3.1" fill="#db2777"><title>second-brain-telegram-bot — 2★</title></circle></g>
+  <circle cx="240" cy="179" r="171" fill="url(#glow-light)"/>
+  <circle cx="240" cy="179" r="74.0" fill="none" stroke="#141821" stroke-opacity="0.10"/><g><animateTransform attributeName="transform" type="rotate" from="0 240 179" to="360 240 179" dur="13.0s" repeatCount="indefinite"/><path d="M314.0,179 A74.0,74.0 0 0 1 292.5,231.5" fill="none" stroke="#ea580c" stroke-opacity="0.34" stroke-width="1.4" stroke-linecap="round"/></g><circle cx="240" cy="179" r="94.8" fill="none" stroke="#141821" stroke-opacity="0.10"/><g><animateTransform attributeName="transform" type="rotate" from="137 240 179" to="-223 240 179" dur="19.5s" repeatCount="indefinite"/><path d="M334.8,179 A94.8,94.8 0 0 1 307.3,246.3" fill="none" stroke="#0284c7" stroke-opacity="0.34" stroke-width="1.4" stroke-linecap="round"/></g><circle cx="240" cy="179" r="115.5" fill="none" stroke="#141821" stroke-opacity="0.10"/><g><animateTransform attributeName="transform" type="rotate" from="274 240 179" to="634 240 179" dur="26.0s" repeatCount="indefinite"/><path d="M355.5,179 A115.5,115.5 0 0 1 322.0,261.0" fill="none" stroke="#7c3aed" stroke-opacity="0.34" stroke-width="1.4" stroke-linecap="round"/></g><circle cx="240" cy="179" r="136.2" fill="none" stroke="#141821" stroke-opacity="0.10"/><g><animateTransform attributeName="transform" type="rotate" from="51 240 179" to="-309 240 179" dur="32.5s" repeatCount="indefinite"/><path d="M376.2,179 A136.2,136.2 0 0 1 336.7,275.7" fill="none" stroke="#16a34a" stroke-opacity="0.34" stroke-width="1.4" stroke-linecap="round"/></g><circle cx="240" cy="179" r="157.0" fill="none" stroke="#141821" stroke-opacity="0.10"/><g><animateTransform attributeName="transform" type="rotate" from="188 240 179" to="548 240 179" dur="39.0s" repeatCount="indefinite"/><path d="M397.0,179 A157.0,157.0 0 0 1 351.5,290.5" fill="none" stroke="#db2777" stroke-opacity="0.34" stroke-width="1.4" stroke-linecap="round"/></g>
+  <g><animateTransform attributeName="transform" type="rotate" from="0 240 179" to="360 240 179" dur="13.0s" repeatCount="indefinite"/><circle cx="314.0" cy="179" r="5.4" fill="#ea580c"><title>telegram-exporter — 62★</title></circle></g><g><animateTransform attributeName="transform" type="rotate" from="137 240 179" to="-223 240 179" dur="19.5s" repeatCount="indefinite"/><circle cx="334.8" cy="179" r="3.9" fill="#0284c7"><title>telegram-exporter-downloads — 22★</title></circle></g><g><animateTransform attributeName="transform" type="rotate" from="274 240 179" to="634 240 179" dur="26.0s" repeatCount="indefinite"/><circle cx="355.5" cy="179" r="3.1" fill="#7c3aed"><title>RixCopier-Extension — 3★</title></circle></g><g><animateTransform attributeName="transform" type="rotate" from="51 240 179" to="-309 240 179" dur="32.5s" repeatCount="indefinite"/><circle cx="376.2" cy="179" r="3.1" fill="#16a34a"><title>telegram-exporter-open — 3★</title></circle></g><g><animateTransform attributeName="transform" type="rotate" from="188 240 179" to="548 240 179" dur="39.0s" repeatCount="indefinite"/><circle cx="397.0" cy="179" r="3.1" fill="#db2777"><title>second-brain-telegram-bot — 2★</title></circle></g>
 
-  <circle cx="240" cy="190" r="31" fill="url(#core-light)">
+  <circle cx="240" cy="179" r="31" fill="url(#core-light)">
     <animate attributeName="r" values="31;33;31" dur="4.6s" repeatCount="indefinite"/>
   </circle>
-  <text x="240" y="196" text-anchor="middle" font-family="Georgia,'Times New Roman',serif"
+  <text x="240" y="185" text-anchor="middle" font-family="Georgia,'Times New Roman',serif"
         font-size="17" font-style="italic" fill="#fff5ec">Rix</text>
 
   <g transform="translate(505,104)">
@@ -34,7 +34,7 @@
     <line x1="0" y1="58" x2="300" y2="58" stroke="#141821" stroke-opacity="0.15"/>
 
     <g font-family="ui-monospace,SFMono-Regular,Menlo,Consolas,monospace" font-size="12.5" fill="#6b7280">
-      <text x="14" y="86">skills для Claude</text>
+      <text x="14" y="86">профессиональные skills</text>
       <text x="14" y="110">агентные системы</text>
       <text x="14" y="134">сложные автоматизации</text>
     </g>
@@ -47,9 +47,9 @@
     <g transform="translate(0,180)"><g transform="translate(0,0)"><text x="0" y="0" font-family="Georgia,'Times New Roman',serif" font-size="27" font-weight="700" fill="#141821">9</text><text x="0" y="24" font-family="ui-monospace,SFMono-Regular,Menlo,Consolas,monospace" font-size="9.5" fill="#6b7280" letter-spacing="0.3">открытых проекта</text></g><g transform="translate(104,0)"><text x="0" y="0" font-family="Georgia,'Times New Roman',serif" font-size="27" font-weight="700" fill="#141821">93</text><text x="0" y="24" font-family="ui-monospace,SFMono-Regular,Menlo,Consolas,monospace" font-size="9.5" fill="#6b7280" letter-spacing="0.3">звезды собрано</text></g><g transform="translate(208,0)"><text x="0" y="0" font-family="Georgia,'Times New Roman',serif" font-size="27" font-weight="700" fill="#141821">26</text><text x="0" y="24" font-family="ui-monospace,SFMono-Regular,Menlo,Consolas,monospace" font-size="9.5" fill="#6b7280" letter-spacing="0.3">форка сделано</text></g></g>
   </g>
 
-  <text x="28" y="358" font-family="ui-monospace,SFMono-Regular,Menlo,Consolas,monospace" font-size="10.5" fill="#6b7280">
+  <text x="28" y="382" font-family="ui-monospace,SFMono-Regular,Menlo,Consolas,monospace" font-size="10.5" fill="#6b7280">
     каждая точка на орбите — живой проект · обновлено 29.07.2026
   </text>
-  <text x="832" y="358" text-anchor="end" font-family="ui-monospace,SFMono-Regular,Menlo,Consolas,monospace"
+  <text x="832" y="382" text-anchor="end" font-family="ui-monospace,SFMono-Regular,Menlo,Consolas,monospace"
         font-size="10.5" fill="#6b7280">186 дней в работе</text>
 </svg>

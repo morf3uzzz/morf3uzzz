@@ -100,14 +100,18 @@ THEMES = {
     },
 }
 
-W, H = 860, 380
-CX, CY = 240, 190
+W, H = 860, 400
 
-# Внешняя орбита должна укладываться в холст с полем, иначе её срезает
-# верхней и нижней кромкой. Радиусы считаются от этого предела, а не задаются
-# жёстко: сколько бы агентов ни было, дальний пройдёт ровно по границе поля.
-MARGIN = 26
-R_MAX = min(CY, H - CY) - MARGIN   # 164
+# Внизу зарезервирована полоса под подпись — орбиты в неё не заходят.
+FOOTER = 42
+FOOTER_Y = H - 18          # базовая линия нижней строки
+CX, CY = 240, (H - FOOTER) // 2
+
+# Внешняя орбита считается от оставшейся высоты, а не задаётся жёстко:
+# сколько бы агентов ни было, дальний пройдёт по границе поля и не пересечёт
+# ни кромку холста, ни подпись.
+MARGIN = 22
+R_MAX = min(CY, (H - FOOTER) - CY) - MARGIN
 R_MIN = 74
 
 
@@ -207,7 +211,7 @@ def render(d, theme):
   <text x="{CX}" y="{CY + 6}" text-anchor="middle" font-family="{serif}"
         font-size="17" font-style="italic" fill="{c['ink']}">Rix</text>
 
-  <g transform="translate(505,104)">
+  <g transform="translate(505,{CY - 75})">
     <text x="0" y="0" font-family="{serif}" font-size="47" fill="{c['text']}"
           letter-spacing="-1.2">RixAI</text>
     <text x="0" y="32" font-family="{serif}" font-size="17" font-style="italic"
@@ -216,7 +220,7 @@ def render(d, theme):
     <line x1="0" y1="58" x2="300" y2="58" stroke="{c['faint']}" stroke-opacity="0.15"/>
 
     <g font-family="{mono}" font-size="12.5" fill="{c['dim']}">
-      <text x="14" y="86">skills для Claude</text>
+      <text x="14" y="86">профессиональные skills</text>
       <text x="14" y="110">агентные системы</text>
       <text x="14" y="134">сложные автоматизации</text>
     </g>
@@ -229,10 +233,10 @@ def render(d, theme):
     <g transform="translate(0,180)">{fact_svg}</g>
   </g>
 
-  <text x="28" y="{H - 22}" font-family="{mono}" font-size="10.5" fill="{c['dim']}">
+  <text x="28" y="{FOOTER_Y}" font-family="{mono}" font-size="10.5" fill="{c['dim']}">
     каждая точка на орбите — живой проект · обновлено {d['updated']}
   </text>
-  <text x="{W - 28}" y="{H - 22}" text-anchor="end" font-family="{mono}"
+  <text x="{W - 28}" y="{FOOTER_Y}" text-anchor="end" font-family="{mono}"
         font-size="10.5" fill="{c['dim']}">{d['days']} дней в работе</text>
 </svg>
 """
