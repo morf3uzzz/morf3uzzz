@@ -1,0 +1,40 @@
+name: build orbit
+
+on:
+  schedule:
+    - cron: "23 4 * * *"
+  workflow_dispatch:
+  push:
+    branches: [main]
+    paths:
+      - build_orbit.py
+      - .github/workflows/orbit.yml
+
+permissions:
+  contents: write
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      # Скрипт сам сверяет цифры с публичным REST API и падает при расхождении,
+      # так что баннер с завышенной статистикой запушить нельзя.
+      - name: Build orbit SVGs
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: python build_orbit.py
+
+      - name: Commit & push
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add orbit-dark.svg orbit-light.svg
+          git diff --cached --quiet || git commit -m "rebuild orbit"
+          git push
