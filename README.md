@@ -11,6 +11,18 @@
 
 <div align="center">
 
+<a href="https://github.com/morf3uzzz/ponyatnost">
+  <img src="https://img.shields.io/badge/skill%2001-%D0%BF%D0%BE%D0%BD%D1%8F%D1%82%D0%BD%D0%BE%D1%81%D1%82%D1%8C-fb923c?style=for-the-badge&labelColor=0b0f17" alt="skill 01 — понятность">
+</a>
+
+<sub>редактура ясности: черновик объясняющей статьи → текст, понятный новичку<br>41 проверка · 7 фаз · гейт выдачи</sub>
+
+</div>
+
+<br>
+
+<div align="center">
+
 <table>
 <tr>
 <td width="420" valign="top">
