@@ -234,11 +234,13 @@ def render(d, theme):
 
     # Подпись отбита от цифры на 24px по базовой линии: при кегле 34 это даёт
     # ~14px чистого просвета, иначе подпись читается как прилепленная.
-    # Два счётчика: скиллы (топик skill) и системы (топик system).
-    facts = [
-        (d["skills"], plural_skills(d["skills"])),
-        (d["systems"], plural_systems(d["systems"])),
-    ]
+    # Два счётчика: скиллы (топик skill) и системы (топик system). Счётчик
+    # систем показывается только при ненулевом значении: приватная сборка
+    # в публичном срезе не видна, и «0 систем» рядом с реально идущей работой
+    # было бы неправдой в другую сторону.
+    facts = [(d["skills"], plural_skills(d["skills"]))]
+    if d["systems"] > 0:
+        facts.append((d["systems"], plural_systems(d["systems"])))
     fact_svg = "".join(
         f'<g transform="translate({i * 168},0)">'
         f'<text x="0" y="0" font-family="{serif}" font-size="34" font-weight="700" '
