@@ -79,20 +79,25 @@ def collect(user):
         if lang:
             langs[lang["name"]] = langs.get(lang["name"], 0) + 1
 
-    # Скилл — публичный репозиторий с топиком `skill`. Повесил топик — цифра
-    # выросла сама, без правки кода.
-    skills = sum(
-        1
-        for r in repos
-        if any(
-            t["topic"]["name"] == "skill" for t in r["repositoryTopics"]["nodes"]
+    # Скилл — публичный репозиторий с топиком `skill`, система — с топиком
+    # `system`. Повесил топик — цифра выросла сама, без правки кода.
+    def by_topic(topic):
+        return sum(
+            1
+            for r in repos
+            if any(
+                t["topic"]["name"] == topic for t in r["repositoryTopics"]["nodes"]
+            )
         )
-    )
+
+    skills = by_topic("skill")
+    systems = by_topic("system")
 
     top = [r for r in repos if r["stargazerCount"] > 0][:5]
 
     return {
         "skills": skills,
+        "systems": systems,
         "agents_word": plural_projects(len(top)),
         "repos": user["repositories"]["totalCount"],
         "stars": sum(r["stargazerCount"] for r in repos),
@@ -161,6 +166,19 @@ def plural_skills(n):
     return "скиллов создано"
 
 
+def plural_systems(n):
+    """Русское склонение: 1 система в сборке · 2 системы в сборке · 5 систем в сборке."""
+    if 11 <= n % 100 <= 14:
+        word = "систем"
+    elif n % 10 == 1:
+        word = "система"
+    elif n % 10 in (2, 3, 4):
+        word = "системы"
+    else:
+        word = "систем"
+    return f"{word} в сборке"
+
+
 def orbits(d, c):
     """Орбиты и агенты. Больше звёзд — ближе к ядру и крупнее точка."""
     top = d["top"]
@@ -214,18 +232,25 @@ def render(d, theme):
     rings, agents = orbits(d, c)
     stack = " · ".join(n for n, _ in d["langs"]) or "Python · JavaScript"
 
-    # Подпись отбита от цифры на 24px по базовой линии: при кегле 27 это даёт
+    # Подпись отбита от цифры на 24px по базовой линии: при кегле 34 это даёт
     # ~14px чистого просвета, иначе подпись читается как прилепленная.
-    fact_svg = (
+    # Два счётчика: скиллы (топик skill) и системы (топик system).
+    facts = [
+        (d["skills"], plural_skills(d["skills"])),
+        (d["systems"], plural_systems(d["systems"])),
+    ]
+    fact_svg = "".join(
+        f'<g transform="translate({i * 168},0)">'
         f'<text x="0" y="0" font-family="{serif}" font-size="34" font-weight="700" '
-        f'fill="{c["text"]}">{d["skills"]}</text>'
+        f'fill="{c["text"]}">{n}</text>'
         f'<text x="0" y="24" font-family="{mono}" font-size="10" fill="{c["dim"]}" '
-        f'letter-spacing="0.4">{plural_skills(d["skills"])}</text>'
+        f'letter-spacing="0.4">{label}</text></g>'
+        for i, (n, label) in enumerate(facts)
     )
 
     return f"""<svg xmlns="http://www.w3.org/2000/svg" width="{W}" height="{H}"
      viewBox="0 0 {W} {H}" role="img"
-     aria-label="RixAI — {d['skills']} {plural_skills(d['skills'])}, на орбите {d['agents_word']}">
+     aria-label="RixAI — {d['skills']} {plural_skills(d['skills'])}, {d['systems']} {plural_systems(d['systems'])}, на орбите {d['agents_word']}">
   <defs>
     <radialGradient id="core-{theme}" cx="50%" cy="50%">
       <stop offset="0%"   stop-color="{c['core_in']}"/>
